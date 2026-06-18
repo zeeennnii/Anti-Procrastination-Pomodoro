@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Procrastination Pomodoro</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>🍅 Anti-Procrastination Pomodoro</h1>
+        <p>Small progress is still progress.</p>
+    </header>
+
+    <main class="container">
+
+        <!-- Task Section -->
+        <section class="card">
+
+            <h2>Today's Tasks</h2>
+
+            <div class="task-input">
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="Enter your task...">
+
+                <button id="addTaskBtn">
+                    Add Task
+                </button>
+
+            </div>
+
+            <ul id="taskList"></ul>
+
+        </section>
+
+
+        <!-- Timer -->
+        <section class="card timer-card">
+
+            <h2>Pomodoro Timer</h2>
+
+            <div id="timer">
+                25:00
+            </div>
+
+            <div class="timer-buttons">
+
+                <button id="startBtn">
+                    ▶ Start
+                </button>
+
+                <button id="pauseBtn">
+                    ⏸ Pause
+                </button>
+
+                <button id="resetBtn">
+                    🔄 Reset
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="card">
+
+            <h2>Your Progress</h2>
+
+            <div class="stats">
+
+                <div class="stat-box">
+
+                    <h3>🔥 Focus Streak</h3>
+
+                    <p id="focusStreak">
+                        0 Days
+                    </p>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <h3>⭐ Participation Streak</h3>
+
+                    <p id="participationStreak">
+                        0 Days
+                    </p>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <h3>🏆 Sessions Today</h3>
+
+                    <p id="sessionCount">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Motivation -->
+        <section class="card">
+
+            <h2>Motivation</h2>
+
+            <p id="quote">
+
+                Success doesn't come from motivation.
+                It comes from consistency.
+
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+
+            Made with ❤️ using HTML, CSS & JavaScript
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
