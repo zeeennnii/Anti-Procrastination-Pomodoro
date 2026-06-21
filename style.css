@@ -1,4 +1,20 @@
 /* =========================================
+   COLOR PALETTE
+========================================= */
+
+:root {
+    --bg-light: #EDF4F7;
+    --olive: #839958;
+    --olive-dark: #6c7f47;
+    --dark-text: #0A3323;
+    --rose: #D3968C;
+    --rose-dark: #bd7d72;
+    --teal: #105666;
+    --teal-dark: #0c4250;
+    --card-bg: #FFFFFF;
+}
+
+/* =========================================
    GENERAL
 ========================================= */
 
@@ -9,10 +25,124 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f7fb;
-    color: #333;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    background: var(--bg-light);
+    color: var(--dark-text);
     min-height: 100vh;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================================
+   LOGIN SCREEN
+========================================= */
+
+.login-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--teal), var(--dark-text));
+    padding: 20px;
+    z-index: 200;
+}
+
+.login-box {
+    background: var(--card-bg);
+    padding: 35px 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.login-box h1 {
+    color: var(--teal);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.login-sub {
+    color: #555;
+    font-size: .9rem;
+    margin-bottom: 20px;
+}
+
+.login-box input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: var(--teal);
+}
+
+.password-field {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.password-field input {
+    width: 100%;
+    padding: 12px 42px 12px 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #777;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password:hover {
+    color: var(--teal);
+}
+
+.login-box button#loginBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--teal);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-box button#loginBtn:hover {
+    background: var(--teal-dark);
+}
+
+.login-error {
+    color: var(--rose-dark);
+    margin-top: 10px;
+    font-size: .9rem;
+    min-height: 1.2em;
 }
 
 /* =========================================
@@ -20,7 +150,8 @@ body {
 ========================================= */
 
 header {
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    position: relative;
+    background: linear-gradient(135deg, var(--teal), var(--dark-text));
     color: white;
     text-align: center;
     padding: 35px 20px;
@@ -34,6 +165,27 @@ header h1 {
 
 header p {
     opacity: .95;
+    line-height: 1.5;
+}
+
+.logout-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: var(--rose);
+    color: var(--dark-text);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.logout-btn:hover {
+    background: var(--rose-dark);
+    color: white;
 }
 
 /* =========================================
@@ -51,7 +203,7 @@ header p {
 ========================================= */
 
 .card {
-    background: white;
+    background: var(--card-bg);
     margin-bottom: 25px;
     padding: 25px;
     border-radius: 15px;
@@ -60,7 +212,261 @@ header p {
 
 .card h2 {
     margin-bottom: 18px;
-    color: #4f46e5;
+    color: var(--teal);
+}
+
+/* =========================================
+   QUOTE CARD (motivation left / music right)
+========================================= */
+
+.quote-card {
+    text-align: left;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.quote-row {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+}
+
+.quote-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quote-text {
+    font-size: 19px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--dark-text);
+    text-align: left;
+    overflow-wrap: break-word;
+    margin-bottom: 14px;
+}
+
+.add-motivation-btn {
+    align-self: flex-start;
+    border: 1px solid var(--olive);
+    background: transparent;
+    color: var(--olive-dark);
+    padding: 4px 10px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: .7rem;
+    font-weight: 600;
+    opacity: .55;
+    transition: .3s;
+}
+
+.add-motivation-btn:hover {
+    opacity: 1;
+    background: var(--olive);
+    color: white;
+}
+
+.quote-right {
+    flex: 1;
+    border-left: 2px solid var(--bg-light);
+    padding-left: 22px;
+}
+
+/* =========================================
+   TIMER (centered)
+========================================= */
+
+.timer-card {
+    text-align: center;
+}
+
+.mode-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.mode-btn {
+    border: 2px solid var(--teal);
+    background: transparent;
+    color: var(--teal);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.mode-btn:hover {
+    background: rgba(16,86,102,.08);
+}
+
+.mode-btn.active {
+    background: var(--teal);
+    color: white;
+}
+
+#timer {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--teal);
+    margin: 25px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.timer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.timer-buttons button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+#startBtn {
+    background: var(--olive);
+}
+
+#startBtn:hover {
+    background: var(--olive-dark);
+}
+
+#pauseBtn {
+    background: var(--rose);
+    color: var(--dark-text);
+}
+
+#pauseBtn:hover {
+    background: var(--rose-dark);
+    color: white;
+}
+
+#resetBtn {
+    background: var(--dark-text);
+}
+
+#resetBtn:hover {
+    background: #051f14;
+}
+
+.music-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.music-carousel {
+    width: 100%;
+    height: 80px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 0;
+}
+
+.music-carousel::-webkit-scrollbar {
+    width: 4px;
+}
+
+.music-carousel::-webkit-scrollbar-thumb {
+    background: var(--teal);
+    border-radius: 4px;
+}
+
+.music-item {
+    scroll-snap-align: center;
+    flex: 0 0 36px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px;
+    cursor: pointer;
+    transition: filter .15s linear, transform .15s linear, opacity .15s linear;
+}
+
+.music-item img {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.music-item span {
+    font-size: .78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-item.is-active span {
+    color: var(--teal);
+}
+
+.music-controls-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.music-toggle-btn {
+    border: none;
+    background: var(--teal);
+    color: white;
+    padding: 7px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: .82rem;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.music-toggle-btn:hover {
+    background: var(--teal-dark);
+}
+
+.add-song-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid var(--olive);
+    background: transparent;
+    color: var(--olive-dark);
+    padding: 4px 10px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: .65rem;
+    font-weight: 600;
+    opacity: .55;
+    transition: .3s;
+}
+
+.add-song-btn:hover {
+    opacity: 1;
+    background: var(--olive);
+    color: white;
 }
 
 /* =========================================
@@ -71,35 +477,66 @@ header p {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    margin-top: 16px;
 }
 
-.task-input input {
+.task-input input[type="text"] {
     flex: 1;
-    min-width: 220px;
+    min-width: 200px;
     padding: 12px;
     border: 2px solid #ddd;
     border-radius: 10px;
     font-size: 16px;
 }
 
+.task-input input[type="number"] {
+    width: 80px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.target-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.target-label {
+    font-size: .65rem;
+    font-weight: 600;
+    color: var(--olive-dark);
+    opacity: .55;
+}
+
 .task-input input:focus {
     outline: none;
-    border-color: #4f46e5;
+    border-color: var(--teal);
 }
 
 .task-input button {
     padding: 12px 20px;
     border: none;
-    background: #4f46e5;
+    background: var(--teal);
     color: white;
     border-radius: 10px;
     cursor: pointer;
     font-size: 15px;
+    font-weight: 600;
     transition: .3s;
 }
 
 .task-input button:hover {
-    background: #3730a3;
+    background: var(--teal-dark);
+}
+
+.active-task-label {
+    margin-bottom: 14px;
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--olive-dark);
 }
 
 /* =========================================
@@ -108,81 +545,75 @@ header p {
 
 #taskList {
     list-style: none;
-    margin-top: 20px;
 }
 
 #taskList li {
-    background: #eef2ff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: var(--bg-light);
     margin-bottom: 10px;
     padding: 12px;
     border-radius: 10px;
+    border: 2px solid transparent;
 }
 
-/* =========================================
-   TIMER
-========================================= */
-
-.timer-card {
-    text-align: center;
+#taskList li.active-task {
+    border-color: var(--teal);
 }
 
-#timer {
-    font-size: 4rem;
-    font-weight: bold;
-    color: #4f46e5;
-    margin: 30px 0;
+#taskList li.completed .task-text {
+    text-decoration: line-through;
+    opacity: .6;
 }
 
-/* =========================================
-   BUTTONS
-========================================= */
-
-.timer-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+#taskList li .task-text {
+    flex: 1;
+    min-width: 120px;
 }
 
-.timer-buttons button {
-
-    padding: 12px 20px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
+.pomodoro-badge {
+    background: var(--olive);
     color: white;
+    font-size: .78rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
 
-    font-size: 16px;
-
+#taskList li button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
     transition: .3s;
 }
 
-#startBtn {
-    background: #16a34a;
+.select-btn {
+    background: var(--teal);
+    color: white;
 }
 
-#startBtn:hover {
-    background: #15803d;
+.select-btn:hover {
+    background: var(--teal-dark);
 }
 
-#pauseBtn {
-    background: #eab308;
+.select-btn.is-selected {
+    background: var(--olive);
 }
 
-#pauseBtn:hover {
-    background: #ca8a04;
+.delete-btn {
+    background: var(--rose);
+    color: var(--dark-text);
 }
 
-#resetBtn {
-    background: #dc2626;
-}
-
-#resetBtn:hover {
-    background: #b91c1c;
+.delete-btn:hover {
+    background: var(--rose-dark);
+    color: white;
 }
 
 /* =========================================
@@ -190,69 +621,345 @@ header p {
 ========================================= */
 
 .stats {
-
     display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
     gap: 15px;
+    margin-bottom: 18px;
 }
 
 .stat-box {
-
-    background: #eef2ff;
-
+    background: var(--bg-light);
     text-align: center;
-
     padding: 20px;
-
     border-radius: 12px;
 }
 
 .stat-box h3 {
-
     margin-bottom: 10px;
-
-    color: #4f46e5;
+    color: var(--teal);
+    font-size: 1rem;
 }
 
 .stat-box p {
-
     font-size: 1.4rem;
-
     font-weight: bold;
 }
 
-/* =========================================
-   MOTIVATION
-========================================= */
+.streak-note {
+    display: block;
+    margin-top: 8px;
+    font-size: .72rem;
+    font-weight: 400;
+    color: #5d7470;
+}
 
-#quote {
+.share-btn {
+    display: block;
+    margin: 0 auto;
+    border: none;
+    background: var(--rose);
+    color: var(--dark-text);
+    padding: 12px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: .3s;
+}
 
-    text-align: center;
-
-    font-size: 18px;
-
-    line-height: 1.6;
-
-    font-style: italic;
+.share-btn:hover {
+    background: var(--rose-dark);
+    color: white;
 }
 
 /* =========================================
-   FOOTER
+   HOW TO USE
 ========================================= */
 
-footer {
-
-    margin-top: 30px;
-
-    padding: 20px;
-
-    background: #4f46e5;
-
-    color: white;
-
+.how-to-card {
     text-align: center;
+}
+
+.how-to-btn {
+    border: 2px solid var(--teal);
+    background: transparent;
+    color: var(--teal);
+    padding: 10px 22px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: .9rem;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.how-to-btn:hover {
+    background: var(--teal);
+    color: white;
+}
+
+.how-to-content {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.how-to-content h3 {
+    color: var(--teal);
+    font-size: 1rem;
+    margin-bottom: 8px;
+    margin-top: 18px;
+}
+
+.how-to-content h3:first-child {
+    margin-top: 0;
+}
+
+.how-to-content p {
+    font-size: .9rem;
+    line-height: 1.6;
+}
+
+.how-to-content ol {
+    padding-left: 20px;
+    font-size: .9rem;
+    line-height: 1.7;
+}
+
+/* =========================================
+   MODALS (Add Motivation / Share Progress)
+========================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,51,35,.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 150;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+.modal-box h2 {
+    color: var(--teal);
+    margin-bottom: 16px;
+}
+
+.modal-box textarea,
+.modal-box input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.modal-box textarea:focus,
+.modal-box input[type="text"]:focus {
+    outline: none;
+    border-color: var(--teal);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.modal-actions button {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    color: white;
+    transition: .3s;
+}
+
+#saveMotivationBtn, #savePngBtn {
+    background: var(--olive);
+}
+
+#saveMotivationBtn:hover, #savePngBtn:hover {
+    background: var(--olive-dark);
+}
+
+#nativeShareBtn {
+    background: var(--teal);
+}
+
+#nativeShareBtn:hover {
+    background: var(--teal-dark);
+}
+
+#twitterShareBtn, #facebookShareBtn {
+    background: var(--rose);
+    color: var(--dark-text);
+}
+
+#twitterShareBtn:hover, #facebookShareBtn:hover {
+    background: var(--rose-dark);
+    color: white;
+}
+
+.modal-cancel {
+    background: #e3e3e3;
+    color: var(--dark-text);
+}
+
+.modal-cancel:hover {
+    background: #cfcfcf;
+}
+
+/* =========================================
+   MOTIVATION LIST (inside Add Motivation modal)
+========================================= */
+
+.motivation-list {
+    list-style: none;
+    margin-top: 16px;
+    max-height: 160px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.motivation-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.motivation-list li:last-child {
+    border-bottom: none;
+}
+
+.motivation-text {
+    font-size: .7rem;
+    font-weight: 600;
+    color: var(--olive-dark);
+    flex: 1;
+}
+
+.motivation-empty {
+    font-size: .7rem;
+    font-weight: 600;
+    color: #999;
+    text-align: center;
+    padding: 8px 0;
+}
+
+.delete-quote-btn {
+    border: none;
+    background: var(--rose);
+    color: var(--dark-text);
+    padding: 4px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: .65rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    transition: .3s;
+}
+
+.delete-quote-btn:hover {
+    background: var(--rose-dark);
+    color: white;
+}
+
+/* =========================================
+   SHARE CARD + TOMATO MASCOT
+========================================= */
+
+.share-modal-box {
+    max-width: 360px;
+}
+
+.share-card {
+    background: linear-gradient(160deg, var(--teal), var(--dark-text));
+    border-radius: 18px;
+    padding: 30px 20px 24px;
+    color: white;
+    text-align: center;
+}
+
+.tomato {
+    position: relative;
+    width: 86px;
+    height: 76px;
+    margin: 10px auto 22px;
+    background: radial-gradient(circle at 35% 30%, #e2756b, #c14a3c);
+    border-radius: 50% 50% 48% 48%;
+    animation: tomato-bounce 1.3s ease-in-out infinite;
+}
+
+.tomato::before {
+    content: "";
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 17px;
+    background: var(--olive);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.tomato .face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    color: white;
+}
+
+@keyframes tomato-bounce {
+    0%, 100% { transform: translateY(0) rotate(-7deg); }
+    50% { transform: translateY(-16px) rotate(7deg); }
+}
+
+.share-streak {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 6px;
+}
+
+.share-sub {
+    font-size: .9rem;
+    opacity: .9;
+    margin-bottom: 14px;
+}
+
+.share-tagline {
+    font-size: .85rem;
+    font-style: italic;
+    opacity: .85;
+}
+
+.share-actions button {
+    flex: 1 1 auto;
 }
 
 /* =========================================
@@ -262,15 +969,32 @@ footer {
 @media (max-width:700px){
 
     #timer{
-
         font-size:3rem;
-
     }
 
     header h1{
-
         font-size:1.6rem;
+    }
 
+    .logout-btn {
+        position: static;
+        display: inline-block;
+        margin-bottom: 12px;
+    }
+
+    .quote-row {
+        flex-direction: column;
+    }
+
+    .quote-right {
+        border-left: none;
+        padding-left: 0;
+        border-top: 2px solid var(--bg-light);
+        padding-top: 18px;
+    }
+
+    .music-block {
+        width: 100%;
     }
 
 }
