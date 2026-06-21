@@ -5,137 +5,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anti-Procrastination Pomodoro</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>🍅 Anti-Procrastination Pomodoro</h1>
-        <p>Small progress is still progress.</p>
-    </header>
+    <!-- LOGIN SCREEN -->
+    <section id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h1>Pomodoro Login</h1>
+            <p class="login-sub">Sign in to access your tasks and timer.</p>
 
-    <main class="container">
+            <input type="text" id="usernameInput" placeholder="Username" autocomplete="username">
 
-        <!-- Task Section -->
-        <section class="card">
-
-            <h2>Today's Tasks</h2>
-
-            <div class="task-input">
-
-                <input
-                    type="text"
-                    id="taskInput"
-                    placeholder="Enter your task...">
-
-                <button id="addTaskBtn">
-                    Add Task
+            <div class="password-field">
+                <input type="password" id="passwordInput" placeholder="Password" autocomplete="current-password">
+                <button type="button" id="togglePasswordBtn" class="toggle-password" aria-label="Show password">
+                    <svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
                 </button>
-
             </div>
 
-            <ul id="taskList"></ul>
+            <button id="loginBtn">Log In</button>
 
-        </section>
+            <p id="loginError" class="login-error"></p>
+        </div>
+    </section>
 
+    <!-- APP -->
+    <div id="appContent" class="app-content hidden">
 
-        <!-- Timer -->
-        <section class="card timer-card">
+        <header>
+            <button id="logoutBtn" class="logout-btn">Log Out</button>
+            <h1>Anti-Procrastination Pomodoro</h1>
+            <p>One Task at a Time. Get Things Done.</p>
+        </header>
 
-            <h2>Pomodoro Timer</h2>
+        <main class="container">
 
-            <div id="timer">
-                25:00
-            </div>
+            <!-- Motivation (left) + Calming Music (right), no heading -->
+            <section class="card quote-card">
 
-            <div class="timer-buttons">
+                <div class="quote-row">
 
-                <button id="startBtn">
-                    ▶ Start
-                </button>
+                    <div class="quote-left">
+                        <p id="quote" class="quote-text">Success doesn't come from motivation. It comes from consistency.</p>
+                        <button id="openMotivationModalBtn" class="add-motivation-btn">+ Add my motivation</button>
+                    </div>
 
-                <button id="pauseBtn">
-                    ⏸ Pause
-                </button>
+                    <div class="quote-right music-block">
 
-                <button id="resetBtn">
-                    🔄 Reset
-                </button>
+                        <div class="music-carousel" id="musicCarousel"></div>
 
-            </div>
+                        <div class="music-controls-row">
+                            <button id="musicToggleBtn" class="music-toggle-btn">Play</button>
+                            <button id="openAddSongModalBtn" class="add-song-btn">+ Add song</button>
+                        </div>
 
-        </section>
-
-
-        <!-- Statistics -->
-        <section class="card">
-
-            <h2>Your Progress</h2>
-
-            <div class="stats">
-
-                <div class="stat-box">
-
-                    <h3>🔥 Focus Streak</h3>
-
-                    <p id="focusStreak">
-                        0 Days
-                    </p>
+                        <audio id="audioPlayer" loop preload="none"></audio>
+                    </div>
 
                 </div>
 
-                <div class="stat-box">
+            </section>
 
-                    <h3>⭐ Participation Streak</h3>
 
-                    <p id="participationStreak">
-                        0 Days
-                    </p>
+            <!-- Timer (centered, no side panel) -->
+            <section class="card timer-card">
+
+                <h2>Pomodoro Timer</h2>
+
+                <div class="mode-buttons">
+                    <button id="focusModeBtn" class="mode-btn">Focus</button>
+                    <button id="shortBreakBtn" class="mode-btn">Short Break</button>
+                    <button id="longBreakBtn" class="mode-btn">Long Break</button>
+                </div>
+
+                <div id="timer">25:00</div>
+
+                <div class="timer-buttons">
+                    <button id="startBtn">Start</button>
+                    <button id="pauseBtn">Pause</button>
+                    <button id="resetBtn">Reset</button>
+                </div>
+
+            </section>
+
+
+            <!-- Tasks (below timer; add-task row below the list) -->
+            <section class="card">
+
+                <h2>Today's Tasks</h2>
+
+                <p id="activeTaskLabel" class="active-task-label">No task selected for the timer</p>
+
+                <ul id="taskList"></ul>
+
+                <div class="task-input">
+                    <input type="text" id="taskInput" placeholder="Enter your task...">
+                    <div class="target-field">
+                        <input type="number" id="taskTargetInput" min="1" value="4" title="Target pomodoros for this task">
+                        <span class="target-label">Est. pomodoros</span>
+                    </div>
+                    <button id="addTaskBtn">Add Task</button>
+                </div>
+
+            </section>
+
+
+            <!-- Statistics -->
+            <section class="card">
+
+                <h2>Your Progress</h2>
+
+                <div class="stats">
+
+                    <div class="stat-box">
+                        <h3>Consistency Streak</h3>
+                        <p id="focusStreak">0 Days</p>
+                        <small class="streak-note">Goes up only on days you finish at least 1 pomodoro.</small>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>Pomodoros Today</h3>
+                        <p id="sessionCount">0</p>
+                    </div>
 
                 </div>
 
-                <div class="stat-box">
+                <button id="shareBtn" class="share-btn">Share Progress</button>
 
-                    <h3>🏆 Sessions Today</h3>
+            </section>
 
-                    <p id="sessionCount">
-                        0
+
+            <!-- How to Use -->
+            <section class="card how-to-card">
+
+                <button id="howToToggleBtn" class="how-to-btn">How to Use</button>
+
+                <div id="howToContent" class="how-to-content hidden">
+
+                    <h3>A Little History</h3>
+                    <p>
+                        The Pomodoro Technique was created by Francesco Cirillo, an Italian developer and
+                        entrepreneur, in the late 1980s while he was a university student struggling to stay
+                        focused on his studies. He named it after the tomato-shaped kitchen timer ("pomodoro"
+                        means tomato in Italian) he used to break his work into short, focused intervals, and
+                        the method has since grown into one of the most popular tools for fighting
+                        procrastination and managing time.
                     </p>
+
+                    <h3>How to Use This App</h3>
+                    <ol>
+                        <li>Add a task and set how many pomodoros you think it will take.</li>
+                        <li>Tap Select on that task so the timer can track its progress.</li>
+                        <li>Pick a mode: Focus, Short Break, or Long Break.</li>
+                        <li>Press Start and work (or rest) until the timer hits zero.</li>
+                        <li>Take the break, then start your next focus session — every 4th one gives a longer break.</li>
+                        <li>Check Your Progress for today's pomodoro count and your streak.</li>
+                    </ol>
 
                 </div>
 
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ADD MOTIVATION MODAL -->
+    <div id="motivationModal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h2>Add My Motivation</h2>
+            <textarea id="motivationInput" rows="3" placeholder="Type your own motivational line..."></textarea>
+            <div class="modal-actions">
+                <button id="saveMotivationBtn">Add Quote</button>
+                <button id="closeMotivationBtn" class="modal-cancel">Cancel</button>
             </div>
 
-        </section>
+            <ul id="motivationList" class="motivation-list"></ul>
+        </div>
+    </div>
 
 
-        <!-- Motivation -->
-        <section class="card">
+    <!-- ADD SONG MODAL -->
+    <div id="addSongModal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h2>Add Song</h2>
+            <input type="text" id="songTitleInput" placeholder="Song title">
+            <input type="text" id="songUrlInput" placeholder="Direct audio link (.mp3, .ogg, .wav)">
+            <input type="text" id="songArtInput" placeholder="Cover image link (optional)">
+            <div class="modal-actions">
+                <button id="saveSongBtn">Add Song</button>
+                <button id="closeSongModalBtn" class="modal-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-            <h2>Motivation</h2>
 
-            <p id="quote">
+    <!-- SHARE PROGRESS MODAL -->
+    <div id="shareModal" class="modal-overlay hidden">
+        <div class="modal-box share-modal-box">
 
-                Success doesn't come from motivation.
-                It comes from consistency.
+            <div class="share-card" id="shareCard">
+                <div class="tomato">
+                    <div class="face">• v •</div>
+                </div>
 
-            </p>
+                <p class="share-streak"><span id="shareStreakNumber">0</span>-Day Streak</p>
+                <p class="share-sub" id="shareSubText">0 pomodoro(s) completed today</p>
+                <p class="share-tagline">Stop procrastinating, start getting things done.</p>
+            </div>
 
-        </section>
+            <div class="modal-actions share-actions">
+                <button id="savePngBtn">Save as PNG</button>
+                <button id="nativeShareBtn">Share</button>
+                <button id="twitterShareBtn">Share on X</button>
+                <button id="facebookShareBtn">Share on Facebook</button>
+                <button id="closeShareBtn" class="modal-cancel">Close</button>
+            </div>
 
-    </main>
+        </div>
+    </div>
 
-    <footer>
-
-        <p>
-
-            Made with ❤️ using HTML, CSS & JavaScript
-
-        </p>
-
-    </footer>
+    <canvas id="shareCanvas" width="600" height="600" class="hidden"></canvas>
 
     <script src="script.js"></script>
 
